@@ -25,5 +25,14 @@ module.exports = {
       directory: "./database/seeds",
     },
   },
-
+  production: {
+    client: 'pg', //npm i pg
+    connection: process.env.DATABASE_URL, // provided by Heroku
+    migrations: {
+      directory: "./database/migrations",
+    },
+    seeds: {
+      directory: "./database/seeds",
+    },
+  }
 };
