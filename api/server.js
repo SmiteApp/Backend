@@ -6,6 +6,8 @@ const creds = require('./secrets');
 const cors = require('cors');
 const usersRouter = require("../users/users-router.js")
 const authRouter = require("../auth/auth-router.js")
+const { getLastMatches, getPlayer} = require('./apiData')
+
 const server = express();
 
 function getByName(name) {
@@ -50,6 +52,17 @@ server.get("/gods/:id", (req,res) => {
 
         res.status(200).json(godlist);
       })
+})
+
+server.get('/player/:player', getPlayer)
+server.get('/matches/:player', getLastMatches)
+
+server.get('/match/:id', (req,res) => {
+  const match = req.params.id
+  api.getMatchDetails(match)
+  .then(mathcdata => {
+    res.status(200).json(mathcdata)
+  })
 })
 server.use('/api/auth', authRouter)
 server.use('/api/users', authenticator, usersRouter)
