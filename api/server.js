@@ -45,6 +45,15 @@ server.get("/items", (req, res) => {
 
 });
 
+server.get("/items/:id", (req,res) => {
+  api.getItems()
+      .then(items => {
+        const itemlist = items.filter(item => item.ItemId.toString() === req.params.id)[0];
+
+        res.status(200).json(itemlist);
+      })
+})
+
 server.get("/gods/:id", (req,res) => {
   api.getGods()
       .then(gods => {
