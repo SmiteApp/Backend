@@ -48,7 +48,7 @@ server.get("/items", (req, res) => {
 server.get("/items/:id", (req,res) => {
   api.getItems()
       .then(items => {
-        const itemlist = items.filter(item => item.ItemId.toString() === req.params.id)[0];
+        const itemlist = items.filter(item => item.DeviceName.toLowerCase().toString().split(" ").join("") === req.params.id)[0];
 
         res.status(200).json(itemlist);
       })
